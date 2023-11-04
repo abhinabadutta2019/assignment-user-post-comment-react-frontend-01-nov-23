@@ -1,7 +1,7 @@
 // Home.js
 
 import React, { useEffect, useState } from "react";
-import { Post } from "./Post";
+import { Post } from "../Post";
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -28,7 +28,8 @@ function Home() {
 
   return (
     <div>
-      <h1>Posts</h1>
+      <h1>Home</h1>
+      <h2>Posts</h2>
       <ul>
         {posts.length > 0 ? (
           posts.map((post) => <Post key={post._id} post={post} />)
