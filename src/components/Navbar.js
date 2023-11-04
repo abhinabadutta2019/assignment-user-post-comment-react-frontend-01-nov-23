@@ -17,6 +17,8 @@ const Navbar = () => {
         <h1>My App Title</h1>
       </Link>
       <Link to="/auth">Auth</Link>
+      <Link to="/create">Create</Link>
+
       <button onClick={logoutHandler}>Logout</button>
     </header>
   );
