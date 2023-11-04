@@ -11,7 +11,10 @@ function Home() {
   }, []);
 
   return (
-    <div className="container mt-4">
+    <div
+      className="container mt-4"
+      style={{ maxWidth: "800px", margin: "0 auto" }}
+    >
       <h1 className="mb-4">Posts Timeline</h1>
       <ul className="list-group">
         {posts.length > 0 ? (
