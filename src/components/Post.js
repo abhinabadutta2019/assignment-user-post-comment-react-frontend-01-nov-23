@@ -19,7 +19,7 @@ function Post({ post }) {
   const submitCommentHandler = async () => {
     if (userObj) {
       const response = await fetch(
-        `http://localhost:3006/posts/comment/${post._id}`,
+        `https://assignment-post-comment-typescript.onrender.com/posts/comment/${post._id}`,
         {
           method: "POST",
           headers: {

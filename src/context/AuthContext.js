@@ -14,7 +14,9 @@ const AuthContextProvider = ({ children }) => {
   //
   async function fetchPosts() {
     try {
-      const response = await fetch("http://localhost:3006/posts");
+      const response = await fetch(
+        "https://assignment-post-comment-typescript.onrender.com/posts"
+      );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }

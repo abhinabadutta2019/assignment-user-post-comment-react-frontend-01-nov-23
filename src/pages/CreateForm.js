@@ -11,16 +11,19 @@ const CreateForm = () => {
     const content = contentElement.value;
 
     try {
-      const response = await fetch("http://localhost:3006/posts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${userObj.token}`,
-        },
-        body: JSON.stringify({
-          content: content,
-        }),
-      });
+      const response = await fetch(
+        "https://assignment-post-comment-typescript.onrender.com/posts",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userObj.token}`,
+          },
+          body: JSON.stringify({
+            content: content,
+          }),
+        }
+      );
 
       if (response.ok) {
         // Form submission successful
