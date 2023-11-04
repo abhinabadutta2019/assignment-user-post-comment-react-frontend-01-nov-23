@@ -12,14 +12,17 @@ const Auth = () => {
     const password = document.getElementById("loginPassword").value;
 
     try {
-      const response = await fetch("http://localhost:3006/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
-      });
+      const response = await fetch(
+        "https://assignment-post-comment-typescript.onrender.com/users/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: username,
+            password: password,
+          }),
+        }
+      );
 
       if (response.ok) {
         const loginResult = await response.json();
@@ -45,14 +48,17 @@ const Auth = () => {
     const password = document.getElementById("registerPassword").value;
 
     try {
-      const response = await fetch("http://localhost:3006/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
-      });
+      const response = await fetch(
+        "https://assignment-post-comment-typescript.onrender.com/users",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: username,
+            password: password,
+          }),
+        }
+      );
 
       if (response.ok) {
         const registrationResult = await response.json();
