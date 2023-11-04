@@ -19,14 +19,12 @@ const Navbar = () => {
     <header className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
         <Link to="/" className="navbar-brand">
-          {" "}
-          {/* Center the title */}
           Let's Discuss
         </Link>
 
         {user && (
           <button
-            className="navbar-toggler" // Add a button for small screens
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -35,23 +33,22 @@ const Navbar = () => {
           </button>
         )}
 
-        <div
-          className={`navbar-collapse${user ? " collapse" : ""}`} // Initially collapse for small screens
-          id="navbarNav"
-        >
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <button className="btn btn-primary" onClick={goToCreatePage}>
-                Create Post
-              </button>
-            </li>
-            <li className="nav-item">
-              <button className="btn btn-danger" onClick={logoutHandler}>
-                Logout
-              </button>
-            </li>
-          </ul>
-        </div>
+        {user && (
+          <div className={`navbar-collapse collapse`} id="navbarNav">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <button className="btn btn-primary" onClick={goToCreatePage}>
+                  Create Post
+                </button>
+              </li>
+              <li className="nav-item">
+                <button className="btn btn-danger" onClick={logoutHandler}>
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </header>
   );
