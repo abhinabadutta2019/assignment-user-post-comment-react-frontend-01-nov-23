@@ -1,28 +1,11 @@
 // Home.js
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { Post } from "../components/Post";
+import { AuthContext } from "../context/AuthContext";
 
 function Home() {
-  const [posts, setPosts] = useState([]);
-
-  //
-  async function fetchPosts() {
-    try {
-      const response = await fetch("http://localhost:3006/posts");
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      //
-      console.log(data, "data");
-      //
-      setPosts(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }
-
+  const { posts, fetchPosts } = useContext(AuthContext);
   //
 
   useEffect(() => {

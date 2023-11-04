@@ -4,6 +4,29 @@ const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  //
+  const [posts, setPosts] = useState([]);
+
+  //   const updatePosts = (data) => {
+  //     setPosts(data);
+  //   };
+
+  //
+  async function fetchPosts() {
+    try {
+      const response = await fetch("http://localhost:3006/posts");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      //
+      console.log(data, "data");
+      //
+      setPosts(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
 
   //
   const login = (userData) => {
@@ -41,7 +64,7 @@ const AuthContextProvider = ({ children }) => {
 
   return (
     <>
-      <AuthContext.Provider value={{ user, login, logout }}>
+      <AuthContext.Provider value={{ user, login, logout, posts, fetchPosts }}>
         {children}
       </AuthContext.Provider>
     </>

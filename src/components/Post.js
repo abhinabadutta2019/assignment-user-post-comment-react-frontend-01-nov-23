@@ -2,46 +2,46 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 function Post({ post }) {
-  //
-  const { user } = useContext(AuthContext);
+  const { user, fetchPosts } = useContext(AuthContext);
   const userObj = JSON.parse(user);
-  //
   const [newComment, setNewComment] = useState("");
   const [showCommentInput, setShowCommentInput] = useState(false);
-  //
-  if (userObj) {
-    // const userObj = JSON.parse(user);
-    const token = userObj.token;
-    // console.log(token, "token:from Post.js");
-  }
-  //
+  const [loginToComment, setLoginToComment] = useState(false); // State for login message
 
   const addCommentHandler = async () => {
-    setShowCommentInput(true);
+    if (userObj) {
+      setShowCommentInput(true);
+    } else {
+      // If the user is not logged in, show a message
+      setLoginToComment(true);
+    }
   };
 
   const submitCommentHandler = async () => {
-    // Send a request to your backend to add the comment
-    const response = await fetch(
-      `http://localhost:3006/posts/comment/${post._id}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${userObj.token}`,
-        },
-        body: JSON.stringify({ comment: newComment }),
-      }
-    );
+    if (userObj) {
+      const response = await fetch(
+        `http://localhost:3006/posts/comment/${post._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userObj.token}`,
+          },
+          body: JSON.stringify({ comment: newComment }),
+        }
+      );
 
-    if (response.ok) {
-      // Successfully added comment, you may want to refresh the post data or update the UI accordingly
-      // Optionally, you can clear the newComment state and hide the comment input field
-      setNewComment("");
-      setShowCommentInput(false);
-    } else {
-      // Handle errors if needed
-      console.error("Error adding comment");
+      if (response.ok) {
+        // Successfully added comment, you may want to refresh the post data or update the UI accordingly
+        // Optionally, you can clear the newComment state and hide the comment input field
+        setNewComment("");
+        setShowCommentInput(false);
+        setLoginToComment(false); // Hide the login message if it was shown
+        fetchPosts();
+      } else {
+        // Handle errors if needed
+        console.error("Error adding comment");
+      }
     }
   };
 
@@ -62,6 +62,8 @@ function Post({ post }) {
           <button onClick={submitCommentHandler}>Submit</button>
         </div>
       )}
+
+      {loginToComment && <p>Login to add a comment.</p>}
 
       <ul>
         {post.comments.map((comment, index) => (
