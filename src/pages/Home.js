@@ -5,8 +5,11 @@ import { Post } from "../components/Post";
 import { AuthContext } from "../context/AuthContext";
 
 function Home() {
-  const { posts, fetchPosts } = useContext(AuthContext);
+  const { posts, fetchPosts, user } = useContext(AuthContext);
   //
+  const userObj = JSON.parse(user);
+
+  console.log(userObj, "userObj from Home.js");
 
   useEffect(() => {
     fetchPosts();

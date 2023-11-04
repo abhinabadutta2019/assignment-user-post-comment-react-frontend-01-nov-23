@@ -10,6 +10,7 @@ function Post({ post }) {
 
   const addCommentHandler = async () => {
     if (userObj) {
+      // console.log(userObj, "userObj from Post.js");
       setShowCommentInput(true);
     } else {
       // If the user is not logged in, show a message
