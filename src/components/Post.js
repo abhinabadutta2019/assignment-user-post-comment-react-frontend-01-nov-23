@@ -50,6 +50,7 @@ function Post({ post }) {
   return (
     <div key={post._id}>
       <h2>Post: {post.content}</h2>
+      <h3>Posted by: {post.user.username}</h3>
       <h3>Comments:</h3>
       <button onClick={addCommentHandler}>Add comments</button>
 
