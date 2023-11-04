@@ -21,7 +21,7 @@ const Navbar = () => {
         <Link to="/" className="navbar-brand">
           {" "}
           {/* Center the title */}
-          My App Title
+          Let's Discuss
         </Link>
 
         {user && (
