@@ -22,10 +22,15 @@ const Navbar = () => {
       <Link to="/">
         <h1>My App Title</h1>
       </Link>
-      <Link to="/auth">Auth</Link>
+      {/* <Link to="/auth">Auth</Link> */}
       {/* <Link to="/create">Create</Link> */}
-      <button onClick={goToCreatePage}>Create Post</button>
-      <button onClick={logoutHandler}>Logout</button>
+
+      {user && (
+        <>
+          <button onClick={goToCreatePage}>Create Post</button>
+          <button onClick={logoutHandler}>Logout</button>
+        </>
+      )}
     </header>
   );
 };
