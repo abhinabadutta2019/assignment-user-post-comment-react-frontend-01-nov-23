@@ -1,4 +1,9 @@
+import { useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+
 const Auth = () => {
+  //
+  const { login } = useContext(AuthContext);
   //
   const loginHandler = async (event) => {
     event.preventDefault();
@@ -16,14 +21,15 @@ const Auth = () => {
         }),
       });
       //
-      const loginResult = await response.json();
-
-      //
-      if (loginResult.token) {
-        console.log("token present");
+      if (response.ok) {
+        const loginResult = await response.json();
+        //
+        console.log(loginResult, "loginResult from login-response.ok");
+        if (loginResult.token) {
+          login(loginResult);
+        }
       }
 
-      console.log("loggedUser:", loginResult);
       //
     } catch (err) {
       console.log(err);
