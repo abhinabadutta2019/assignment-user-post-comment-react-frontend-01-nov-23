@@ -32,15 +32,16 @@ function Post({ post }) {
       );
 
       if (response.ok) {
-        // Successfully added comment, you may want to refresh the post data or update the UI accordingly
-        // Optionally, you can clear the newComment state and hide the comment input field
+        // Successfully added comment
         setNewComment("");
         setShowCommentInput(false);
-        setLoginToComment(false); // Hide the login message if it was shown
+        setLoginToComment(false);
         fetchPosts();
+        window.alert("Comment added successfully!"); // Show a success alert
       } else {
         // Handle errors if needed
         console.error("Error adding comment");
+        window.alert("Error adding comment. Please try again."); // Show an error alert
       }
     }
   };
