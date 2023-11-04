@@ -6,14 +6,12 @@ function Post({ post }) {
   const userObj = JSON.parse(user);
   const [newComment, setNewComment] = useState("");
   const [showCommentInput, setShowCommentInput] = useState(false);
-  const [loginToComment, setLoginToComment] = useState(false); // State for login message
+  const [loginToComment, setLoginToComment] = useState(false);
 
   const addCommentHandler = async () => {
     if (userObj) {
-      // console.log(userObj, "userObj from Post.js");
       setShowCommentInput(true);
     } else {
-      // If the user is not logged in, show a message
       setLoginToComment(true);
     }
   };
@@ -33,49 +31,59 @@ function Post({ post }) {
       );
 
       if (response.ok) {
-        // Successfully added comment
         setNewComment("");
         setShowCommentInput(false);
         setLoginToComment(false);
         fetchPosts();
-        window.alert("Comment added successfully!"); // Show a success alert
+        window.alert("Comment added successfully!");
       } else {
-        // Handle errors if needed
         console.error("Error adding comment");
-        window.alert("Error adding comment. Please try again."); // Show an error alert
+        window.alert("Error adding comment. Please try again.");
       }
     }
   };
 
   return (
-    <div key={post._id}>
-      <h2>Post: {post.content}</h2>
-      <h3>Posted by: {post.user.username}</h3>
-      <h3>Comments:</h3>
-      <button onClick={addCommentHandler}>Add comments</button>
+    <div className="card mb-4">
+      <div className="card-body">
+        <h2 className="card-title">Post: {post.content}</h2>
+        <h5 className="card-subtitle mb-2 text-muted">
+          Posted by: {post.user.username}
+        </h5>
+        <h5 className="card-subtitle mb-2 text-muted">Comments:</h5>
+        <button className="btn btn-primary" onClick={addCommentHandler}>
+          Add comments
+        </button>
 
-      {showCommentInput && (
-        <div>
-          <input
-            type="text"
-            placeholder="Type your comment..."
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-          />
-          <button onClick={submitCommentHandler}>Submit</button>
-        </div>
-      )}
+        {showCommentInput && (
+          <div className="mt-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Type your comment..."
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+            />
+            <button
+              className="btn btn-success mt-2"
+              onClick={submitCommentHandler}
+            >
+              Submit
+            </button>
+          </div>
+        )}
 
-      {loginToComment && <p>Login to add a comment.</p>}
+        {loginToComment && <p className="mt-3">Login to add a comment.</p>}
 
-      <ul>
-        {post.comments.map((comment, index) => (
-          <li key={index}>
-            <p>User: {comment.user.username}</p>
-            <p>Comment: {comment.text}</p>
-          </li>
-        ))}
-      </ul>
+        <ul className="list-group mt-3">
+          {post.comments.map((comment, index) => (
+            <li key={index} className="list-group-item">
+              <p className="card-text">User: {comment.user.username}</p>
+              <p className="card-text">Comment: {comment.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

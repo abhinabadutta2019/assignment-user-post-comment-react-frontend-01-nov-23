@@ -37,12 +37,18 @@ const CreateForm = () => {
   };
 
   return (
-    <div>
-      <h2>Create Post</h2>
+    <div className="container mt-4">
+      <h2 className="mb-4">Create Post</h2>
       <form onSubmit={formHandler}>
-        <label>Content</label>
-        <textarea id="content" type="text" required />
-        <button type="submit">Submit here</button>
+        <div className="mb-3">
+          <label htmlFor="content" className="form-label">
+            Content
+          </label>
+          <textarea id="content" className="form-control" required></textarea>
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
       </form>
     </div>
   );
