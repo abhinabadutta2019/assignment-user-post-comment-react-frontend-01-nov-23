@@ -17,12 +17,28 @@ const Navbar = () => {
 
   return (
     <header className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link to="/" className="navbar-brand">
-        My App Title
-      </Link>
+      <div className="container">
+        <Link to="/" className="navbar-brand">
+          {" "}
+          {/* Center the title */}
+          My App Title
+        </Link>
 
-      {user && (
-        <div className="navbar-collapse">
+        {user && (
+          <button
+            className="navbar-toggler" // Add a button for small screens
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+        )}
+
+        <div
+          className={`navbar-collapse${user ? " collapse" : ""}`} // Initially collapse for small screens
+          id="navbarNav"
+        >
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
               <button className="btn btn-primary" onClick={goToCreatePage}>
@@ -36,7 +52,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-      )}
+      </div>
     </header>
   );
 };
