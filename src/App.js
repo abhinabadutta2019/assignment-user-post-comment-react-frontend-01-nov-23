@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import { Navbar } from "./components/Navbar";
+import CustomNavbar from "./components/Navbar";
 import { Home } from "./pages/Home";
 import { Auth } from "./pages/Auth";
 import { CreateForm } from "./pages/CreateForm";
@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
+        <CustomNavbar />
         <div className="pages">
           <Routes>
             {/* <Route path="/" element={<Home />} /> */}

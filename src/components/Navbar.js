@@ -1,9 +1,19 @@
+import React from "react";
+import { Navbar, Nav, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 
-const Navbar = () => {
+const centerStyle = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "100%",
+};
+
+const CustomNavbar = () => {
   const { logout, user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -16,42 +26,35 @@ const Navbar = () => {
   };
 
   return (
-    <header className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container">
-        <Link to="/" className="navbar-brand">
+    <Navbar bg="light" expand="lg">
+      <div style={centerStyle}>
+        <Navbar.Brand as={Link} to="/" style={{ textAlign: "center" }}>
           Let's Discuss
-        </Link>
-
+        </Navbar.Brand>
         {user && (
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-        )}
-
-        {user && (
-          <div className={`navbar-collapse collapse`} id="navbarNav">
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <button className="btn btn-primary" onClick={goToCreatePage}>
-                  Create Post
-                </button>
-              </li>
-              <li className="nav-item">
-                <button className="btn btn-danger" onClick={logoutHandler}>
-                  Logout
-                </button>
-              </li>
-            </ul>
-          </div>
+          <Navbar.Toggle
+            aria-controls="basic-navbar-nav"
+            style={{ marginLeft: "auto" }}
+          />
         )}
       </div>
-    </header>
+
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mx-auto">
+          {user && (
+            <Button variant="primary" onClick={goToCreatePage}>
+              Create Post
+            </Button>
+          )}
+          {user && (
+            <Button variant="danger" onClick={logoutHandler}>
+              Logout
+            </Button>
+          )}
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 
-export { Navbar };
+export default CustomNavbar;
