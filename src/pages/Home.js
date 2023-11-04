@@ -1,7 +1,7 @@
 // Home.js
 
 import React, { useEffect, useState } from "react";
-import { Post } from "../Post";
+import { Post } from "../components/Post";
 
 function Home() {
   const [posts, setPosts] = useState([]);
